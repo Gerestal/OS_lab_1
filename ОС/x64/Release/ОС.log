@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\User\Desktop\С++\ОС\ОС\main.cpp(90,15): warning C4101: emp: неиспользованная локальная переменная
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+  All 288 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  ОС.vcxproj -> C:\Users\User\Desktop\С++\ОС\x64\Release\ОС.exe

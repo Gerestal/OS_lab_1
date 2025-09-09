@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{31464CDE-21A5-4805-B807-60D5542463E5}|\u041E\u0421\\\u041E\u0421.vcxproj|C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\\u041E\u0421\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{31464CDE-21A5-4805-B807-60D5542463E5}|\u041E\u0421\\\u041E\u0421.vcxproj|solutionrelative:\u041E\u0421\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5C0E2FA-ADB0-4D01-9C64-435784EFE44A}|Reporter\\Reporter.vcxproj|C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\Reporter\\Reporter.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5C0E2FA-ADB0-4D01-9C64-435784EFE44A}|Reporter\\Reporter.vcxproj|solutionrelative:Reporter\\Reporter.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E5C853F-F495-4F97-A13C-0B91FD775068}|\u041E\u0421_1\\\u041E\u0421_1.vcxproj|C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\\u041E\u0421_1\\Creator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4E5C853F-F495-4F97-A13C-0B91FD775068}|\u041E\u0421_1\\\u041E\u0421_1.vcxproj|solutionrelative:\u041E\u0421_1\\Creator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Reporter.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\Reporter\\Reporter.cpp",
+              "RelativeDocumentMoniker": "Reporter\\Reporter.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\Reporter\\Reporter.cpp",
+              "RelativeToolTip": "Reporter\\Reporter.cpp",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACIAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-08T09:05:54.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\\u041E\u0421\\main.cpp",
+              "RelativeDocumentMoniker": "\u041E\u0421\\main.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\\u041E\u0421\\main.cpp",
+              "RelativeToolTip": "\u041E\u0421\\main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-05T14:31:37.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Creator.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\\u041E\u0421_1\\Creator.cpp",
+              "RelativeDocumentMoniker": "\u041E\u0421_1\\Creator.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\\u0421\u002B\u002B\\\u041E\u0421\\\u041E\u0421_1\\Creator.cpp",
+              "RelativeToolTip": "\u041E\u0421_1\\Creator.cpp",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-05T14:30:09.121Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
