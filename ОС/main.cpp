@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <exception>
 
 using namespace std;
 
@@ -41,18 +42,19 @@ bool DoProcess(const wstring& appPath, const wstring& params)
         NULL, NULL,
         &si, &pi))
     {
-        wcerr << L"Ошибка запуска процесса: " << appPath << endl;
-        return false;
+        throw runtime_error("Cannot start process: " +
+            string(appPath.begin(), appPath.end()));
     }
 
     
     DWORD waitResult = WaitForSingleObject(pi.hProcess, INFINITE);
     if (waitResult == WAIT_FAILED)
     {
-        cerr << "Ошибка ожидания процесса. Код: " << GetLastError() << endl;
         CloseHandle(pi.hThread);
         CloseHandle(pi.hProcess);
-        return false;
+        throw runtime_error("Error waiting for process. Code: " +
+            to_string(GetLastError()));
+       
     }
 
     
@@ -69,7 +71,7 @@ void PrintFile(const string& fileName)
     ifstream file(fileName, ios::binary);
     if (!file)
     {
-        cerr << "Не удалось открыть файл: " << fileName << endl;
+        cerr << "Couldn't open the file: " << fileName << endl;
         return;
     }
     
@@ -91,7 +93,7 @@ void PrintFile2(const string& fileName)
     ifstream file(fileName);
     if (!file)
     {
-        cerr << "Не удалось открыть файл: " << fileName << endl;
+        cerr << "Couldn't open the file: " << fileName << endl;
         return;
     }
     string line;
@@ -105,58 +107,66 @@ void PrintFile2(const string& fileName)
 
 int main()
 {
+    try {
 
-    setlocale (LC_ALL, "Russian");
+        string binFileName;
+        int recordCount;
 
-    
-    string binFileName;
-    int recordCount;
+        cout << "Enter the name of the binary file: ";
+        cin >> binFileName;
+        cout << "Enter the number of employees: ";
+        cin >> recordCount;
 
-    cout << "Enter the name of the binary file: ";
-    cin >> binFileName;
-    cout << "Enter the number of entries: ";
-    cin >> recordCount;
 
-    
-    wstring creatorPath = L"C:/Users/User/Desktop/С++/ОС/x64/Release/ОС_1.exe";
-    wstring creatorParams = wstring(binFileName.begin(), binFileName.end()) + L" " + to_wstring(recordCount);
+        wstring creatorPath = L"C:/Users/User/Desktop/С++/ОС/x64/Release/ОС_1.exe";
+        wstring creatorParams = wstring(binFileName.begin(), binFileName.end()) + L" " + to_wstring(recordCount);
 
-    if (!DoProcess(creatorPath, creatorParams))
-    {
-        _cputs("Creator startup Error.\n");
-        return 0;
+        DoProcess(creatorPath, creatorParams);
+
+
+        cout << "\nThe contents of the binary file:\n";
+        PrintFile(binFileName);
+
+
+        string reportFileName;
+        double hourlyRate;
+
+        cout << "\nEnter the name of the report file: ";
+        cin >> reportFileName;
+        cout << "Enter the payment for the hour of work: ";
+        cin >> hourlyRate;
+
+
+        wstring reporterPath = L"C:/Users/User/Desktop/С++/ОС/x64/Release/Reporter.exe";
+        wstring reporterParams = wstring(binFileName.begin(), binFileName.end()) + L" " +
+            wstring(reportFileName.begin(), reportFileName.end()) + L" " +
+            to_wstring(hourlyRate);
+
+        DoProcess(reporterPath, reporterParams);
+
+
+        cout << "\nReport Content:\n";
+        PrintFile2(reportFileName);
+
+        _cputs("\nThe work is completed.\n");
+        _getch();
+       
     }
-
-    
-    cout << "\nThe contents of the binary file:\n";
-    PrintFile(binFileName);
-
-  
-    string reportFileName;
-    double hourlyRate;
-
-    cout << "\nEnter the name of the report file: ";
-    cin >> reportFileName;
-    cout << "Enter the payment for the hour of work: ";
-    cin >> hourlyRate;
-
-    
-    wstring reporterPath = L"C:/Users/User/Desktop/С++/ОС/x64/Release/Reporter.exe";
-    wstring reporterParams = wstring(binFileName.begin(), binFileName.end()) + L" " +
-        wstring(reportFileName.begin(), reportFileName.end()) + L" " +
-        to_wstring(hourlyRate);
-
-    if (!DoProcess(reporterPath, reporterParams))
-    {
-        _cputs("Reporter launch error.\n");
-        return 0;
+    catch (const ios_base::failure& io_err) {
+        cerr << "I/O error: " << io_err.what() << endl;
+        return 1;
     }
-
-    
-    cout << "\nReport Content:\n";
-    PrintFile2(reportFileName);
-
-    _cputs("\nThe work is completed.\n");
-    _getch();
+    catch (const invalid_argument& arg_err) {
+        cerr << "Invalid argument: " << arg_err.what() << endl;
+        return 2;
+    }
+    catch (const out_of_range& range_err) {
+        cerr << "Value out of range: " << range_err.what() << endl;
+        return 3;
+    }
+    catch (const exception& ex) {
+        cerr << "Error: " << ex.what() << endl;
+        return 4;
+    }
     return 0;
 }

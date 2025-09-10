@@ -13,53 +13,69 @@ struct employee {
 };
 
 int main(int argc, char* argv[]) {
-    setlocale(LC_ALL, "Russian");
+    try {
 
-    if (argc != 3) {
-        cerr << "Usage: " << argv[0] << " <output-file> <record-count>\n";
+        if (argc != 3) {
+            throw invalid_argument(
+                string("Usage: ") + argv[0] + " <output-file> <record-count>");
+        }
+
+        const char* filename = argv[1];
+        int recordCount = stoi(argv[2]);
+
+        if (recordCount <= 0) {
+            throw invalid_argument(
+                string("Invalid record count: ") + argv[2]);
+        }
+
+        ofstream fout(filename, ios::binary);
+        fout.exceptions(ofstream::failbit | ofstream::badbit);
+
+        for (int i = 0; i < recordCount; ++i) {
+            employee emp;
+            string tmp;
+
+            cout << "Enter information about employee number " << (i + 1) << "\n";
+
+            cout << "Employee identification number: ";
+            if (!(cin >> emp.num)) {
+                throw runtime_error("Invalid input for employee id");
+            }
+
+            cout << "Employee's name: ";
+            if (!(cin >> tmp)) {
+                throw runtime_error("Invalid input for employee name");
+            }
+            strncpy_s(emp.name, sizeof(emp.name), tmp.c_str(), _TRUNCATE);
+            emp.name[sizeof(emp.name) - 1] = '\0';
+
+            cout << "Number of working hours: ";
+            if (!(cin >> emp.hours))
+                throw runtime_error("Invalid input for working hours");
+
+            fout.write(reinterpret_cast<const char*>(&emp), sizeof(emp));
+        }
+
+        fout.close();
+        cout << "Done. Wrote " << recordCount << " records into \"" << filename << "\"\n";
+      
+    }
+    catch (const invalid_argument& e) {
+        cerr << "Argument error: " << e.what() << endl;
         return 1;
     }
-
-    const char* filename = argv[1];
-    int recordCount = atoi(argv[2]);
-
-    if (recordCount <= 0) {
-        cerr << "Invalid record count: " << argv[2] << "\n";
+    catch (const out_of_range& e) {
+        cerr << "Out of range error: " << e.what() << endl;
         return 2;
     }
-
-    ofstream fout(filename, ios::binary);
-    if (!fout) {
-        cerr << "Cannot open file for writing: " << filename << "\n";
+    catch (const ios_base::failure& e) {
+        cerr << "I/O error: " << e.what() << endl;
         return 3;
     }
-
-    for (int i = 0; i < recordCount; ++i) {
-        employee emp;
-        string tmp;
-
-        cout << "Enter information about employee number " << (i + 1) << "\n";
-
-        cout << "Employee identification number: ";
-        cin >> emp.num;
-
-        cout << "Employee's name: ";
-        cin >> tmp;
-        strncpy_s(emp.name, sizeof(emp.name), tmp.c_str(), _TRUNCATE);
-        emp.name[sizeof(emp.name) - 1] = '\0'; 
-
-        cout << "Number of working hours: ";
-        cin >> emp.hours;
-
-        fout.write(reinterpret_cast<const char*>(&emp), sizeof(emp));
-        if (!fout) {
-            cerr << "Write error on record " << (i + 1) << "\n";
-            return 4;
-        }
+    catch (const exception& e) {
+        cerr << "Unexpected error: " << e.what() << endl;
+        return 4;
     }
-
-    fout.close();
-    cout << "Done. Wrote " << recordCount << " records into \"" << filename << "\"\n";
     return 0;
 }
 
